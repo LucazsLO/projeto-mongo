@@ -2,6 +2,7 @@ package com.estudos.workshopmongo.Resource;
 
 import com.estudos.workshopmongo.DTO.UserDTO;
 import com.estudos.workshopmongo.Services.UserService;
+import com.estudos.workshopmongo.domain.Post;
 import com.estudos.workshopmongo.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -49,5 +50,10 @@ public class UserResource {
         obj.setId(id);
         obj = service.update(obj);
         return ResponseEntity .noContent().build();
+    }
+    @RequestMapping(value ="/{id}/post", method=RequestMethod.GET)
+    public ResponseEntity <List<Post>> findPost(@PathVariable String id){
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 }
