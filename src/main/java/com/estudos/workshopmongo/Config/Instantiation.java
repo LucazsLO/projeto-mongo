@@ -1,5 +1,6 @@
 package com.estudos.workshopmongo.Config;
 
+import com.estudos.workshopmongo.DTO.AuthorDTO;
 import com.estudos.workshopmongo.Repository.PostRepository;
 import com.estudos.workshopmongo.Repository.UserRepository;
 import com.estudos.workshopmongo.domain.Post;
@@ -33,10 +34,11 @@ public class Instantiation  implements CommandLineRunner {
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
-        Post post1 = new Post(null,sdf.parse("21/03/2018"), "Partiu viagem","Vou para SP :)", maria );
-        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei Feliz hoje!" , maria);
-
         userRepository.saveAll(Arrays.asList(maria,alex,bob));
+
+        Post post1 = new Post(null,sdf.parse("21/03/2018"), "Partiu viagem","Vou para SP :)", new AuthorDTO(maria) );
+        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei Feliz hoje!" , new AuthorDTO(maria));
+
         postRepository.saveAll(Arrays.asList(post1,post2));
     }
 }
